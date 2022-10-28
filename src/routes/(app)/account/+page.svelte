@@ -13,12 +13,20 @@
 
 <div class="card bg-base-100 m-auto mt-6 shadow-xl mb-6">
     <div class="card-body">
+        <!-- Header -->
         <AccountHeader />
         <div class="divider"></div>
+        <!-- Description:Bio -->
         <h2 class="text-xl text-primary">Descripción</h2>
         <Bio currentBio={bio ? bio : ''} />
         <div class="divider"></div>
-        <p>Almost done</p>
+        <!-- Password -->
+        <h2 class="text-xl text-primary">Cambiar contraseña</h2>
+        <a href="/pass-recovery" class="link link-hover" >Cambiar</a>
+        <div class="divider"></div>
+        <!-- Premium -->
+        <h2 class="text-xl text-primary">Hacer premium</h2>
+        <a href="/pass-recovery" class="link link-hover" >Actualizar</a>
     </div>
 </div>
 

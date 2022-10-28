@@ -41,7 +41,7 @@
     const clean = () => filters.reset();
 </script>
 
-<ul class="p-1 flex  flex-col justify-start" >
+<ul class="p-1 flex  flex-col justify-start h-full" >
     <FilterSelect
         label='Categoría'
         name='category'

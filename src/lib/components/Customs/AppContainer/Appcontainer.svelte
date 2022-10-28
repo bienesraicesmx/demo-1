@@ -36,7 +36,7 @@
 <div class="content">
     <ResponsiveDrawer>
         <FilterBar slot="menu" {cities} {...prices} />
-        <div slot="content" class="">
+        <div slot="content" class="h-full">
             <slot/>
         </div>
     </ResponsiveDrawer>
