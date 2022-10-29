@@ -54,7 +54,7 @@
             {/if}
         {/each}
         <br>
-        <a href="/advert/add/info" class="btn btn-success text-white btn-sm mt-4" >Siguiente</a>
+        <a href="/advert/add/preview" class="btn btn-success text-white btn-sm mt-4" >Siguiente</a>
     </div>
     {/if}
     <div>
