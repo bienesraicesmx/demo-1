@@ -26,7 +26,8 @@
         <div class="divider"></div>
         <!-- Premium -->
         <h2 class="text-xl text-primary">Hacer premium</h2>
-        <a href="/pass-recovery" class="link link-hover" >Actualizar</a>
+        <a href="https://telegram.com" target="blank" class="link link-hover" >Ir ahora</a>
+        <span class="text-xs text-info">Este enlace te dirigirá a un chat de telegram donde podrás solicitar tu cuenta premium</span>
     </div>
 </div>
 

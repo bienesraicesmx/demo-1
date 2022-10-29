@@ -12,28 +12,23 @@
     const handleReset = () => reset(name);
 </script>
 
-<li class="form-group p-1 w-full">
+<li class="form-group w-full">
     {#if !value}
     <label for="" class="text-xs" class:text-primary={!ghost}>{label}</label>
     <select
-        on:change={onChange} {name} 
-        class:select-ghost={ghost}
-        class:select-primary={!ghost}
-        class:text-primary={!ghost}
-        class:text-white={ghost}
+        bind:value
+        on:change={onChange} {name}         
         class="select select-bordered  select-xs w-full max-w-xs"
     >
-        <option class:text-white={ghost} disabled selected value="">Seleccione</option>
+        <option  disabled selected value="">Seleccione</option>
         {#each options as option}
-            <option class:text-white={ghost} value={option.value}>{option.tag}</option>
+            <option value={option.value}>{option.tag}</option>
         {/each}
     </select>
     {:else}
     <!--svelte-ignore a11y-click-events-have-key-events-->
     <div
-        class:badge-outline={ghost}
-        class:badge-primary={!ghost} 
-        class="badge text-white gap-2" on:click={handleReset}>
+        class="badge badge-primary m-2 text-white gap-2" on:click={handleReset}>
         <CloseIcon/>
         {value}
     </div>

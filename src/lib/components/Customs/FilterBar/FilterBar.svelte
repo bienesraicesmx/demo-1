@@ -103,5 +103,5 @@
             onChange={handleFilter} 
         />
     </div>
-    <button class="btn btn-xs btn-ghost text-primary mt-3">limpiar</button>
+    <button on:click={clean} class="btn btn-xs btn-ghost text-primary mt-3">limpiar</button>
 </ul>
