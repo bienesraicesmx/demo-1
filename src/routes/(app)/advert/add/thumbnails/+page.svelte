@@ -51,7 +51,10 @@
         advert.clean('images')
     }
 </script>
-
+<h2 class="text-primary text-2xl font-bold text-center">
+    Selecciona {$auth.premium ? 'de 1 a 5 imágenes ' : '1 imagen '} para tu anuncio
+</h2>
+<br>
 {#if $auth.premium || images.length === 0}
 <Dropzone {handleFilesSelect} />
 {:else if $auth.premium && images.length < 5}
@@ -60,6 +63,6 @@
 <ImagesPreview {handleRemoveAll} {handleRemoveFile} files={files.accepted} {images} />
 {#if files.accepted.length > 0}
     <div>
-        <a class="btn btn-success text-white btn-sm mt-1" href="/advert/add/location">Siguiente</a>
+        <a class="btn btn-success text-white btn-sm mt-1" href="/advert/add/info">Siguiente</a>
     </div>
 {/if}

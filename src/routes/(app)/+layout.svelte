@@ -13,7 +13,7 @@
 <svelte:window bind:innerHeight={innerH} />
 
 <div class="content" style="min-height:{innerH}px; position:{screenDif < 0 ? 'relative' : ''}">
-    <NavBarApp bind:navbar visible={true} />
+    <NavBarApp bind:navbar={navbar} visible={true} />
     <div class="embed" bind:clientHeight={embedH}>
         <slot/>
     </div>

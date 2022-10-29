@@ -2,8 +2,9 @@
     import { Stretch } from 'svelte-loading-spinners';
     import { MapInput } from '$lib/components';
     import { fetchLocation } from '$lib/www/geolocation';
-    import { advert } from '$lib/store';
-    
+    import { advert , center } from '$lib/store';
+    $: console.log($center);
+
     let keys = {
         'city':'Ciudad',
         'locality':'Localidad',
@@ -15,9 +16,9 @@
     $: data = { address:null};
     $: loading = false;
     $: zoom = 10;
-    $: lat = 10.4880104;
-    $: lng = -66.8691885; 
-    $: center = [lng,lat];
+    $: lat = $center[0];
+    $: lng = $center[1]; 
+    $: mapCenter = [lng,lat];
     const onPick  = async (e) => {
         if(e.detail.lat){
             lat = e.detail.lat;
@@ -25,12 +26,15 @@
             loading = true;
             data = await fetchLocation({lat,lon:lng})
             loading = false;
-            advert.add({lat,lon:lng,address:data.address,city:data.address.city ? data.address.city : ''})
+            advert.add({lat,lon:lng,address:data.address})
         }
     }
 </script>
-
-<MapInput {onPick}{zoom}{lat}{lng}{center} />
+<h2 class="text-primary text-2xl font-bold text-center">
+    Selecciona su ubicación en el mapa
+</h2>
+<br>
+<MapInput {onPick}{zoom}{lat}{lng} center={mapCenter}  />
 {#if loading}
     <div style="width:100%;display:grid;place-content:center;margin-top:2em;">
         <Stretch size="60" color="#80a4ed" />

@@ -23,8 +23,8 @@ const advertStore = () => {
 
     return {
         subscribe,
-        add: args => update(store => (store = {...store,...args})),
-        clean: key => update(s => (s = {...s,[store[key]]:initial[key]})),
+        add: args => update(s => (s = {...s,...args})),
+        clean: key => update(s => (s = {...s,[s[key]]:initial[key]})),
         reset: () => set(initial)
     }
 }
