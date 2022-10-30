@@ -3,7 +3,6 @@
     import { MapInput } from '$lib/components';
     import { fetchLocation } from '$lib/www/geolocation';
     import { advert , center } from '$lib/store';
-    $: console.log($center);
 
     let keys = {
         'city':'Ciudad',

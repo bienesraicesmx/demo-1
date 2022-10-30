@@ -15,6 +15,7 @@
             .all($advert.images.map(async img => await fileUpload(img)));
             data.createdAt = Timestamp.now();
             data.createdBy = $auth.uid;
+            data.temporal = $auth.premium ? false : true;
             data.price = parseInt($advert.price);
             const {success,message} = await createProp(data);
             if(success){ 

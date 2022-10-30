@@ -4,6 +4,7 @@
     export let data;
 
     const { docs } = data;
+
 </script>
 
 {#if docs.length === 0}
