@@ -1,7 +1,6 @@
 <script>
     import { NavBarApp , Footer } from '$lib/components';
-    export let data; 
-    $: console.log(data);
+    //export let data; 
     let innerH;
     let embedH;
     let footer;

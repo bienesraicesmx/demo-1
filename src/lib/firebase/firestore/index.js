@@ -26,7 +26,6 @@ export const GetDocs = async (colname) => {
 };
 
 export const GetDoc = async (id,colname) => {
-    console.log('From module ',id)
     try {
         const docRef = doc(db,colname,id);
         const docSnap = await getDoc(docRef);

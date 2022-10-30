@@ -8,8 +8,6 @@
 
     $: imgs = doc.images; 
     $: currentImage = 0;
-    
-    $: console.log(doc.images,imgs);
 
     const showImg = (e) => {
         currentImage = e.target.id;
