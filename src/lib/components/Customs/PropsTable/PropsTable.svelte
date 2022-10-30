@@ -1,4 +1,5 @@
 <script>
+    import Modal from './Modal.svelte';
     import relativeTime from 'dayjs/plugin/relativeTime';
     import updateLocale from 'dayjs/plugin/updateLocale';
     import dayjs from 'dayjs';
@@ -69,7 +70,8 @@
                     <a href="/own/adverts/edit/{doc.id}" class="btn btn-ghost text-primary btn-xs">editar</a>
                 </th>
                 <th>
-                    <a href="/own/adverts/edit/{doc.id}" class="btn btn-ghost text-error btn-xs">quitar</a>
+                    <Modal id={doc.id} title={doc.title} />
+                    <!-- <a href="#my-modal" class="btn btn-ghost text-error btn-xs">quitar</a> -->
                 </th>
             </tr>
             {/each}
@@ -80,6 +82,8 @@
         </tfoot>      
     </table>
 </div>
+
+
 
 <style>
     table {

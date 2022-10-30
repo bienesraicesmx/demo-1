@@ -1,4 +1,4 @@
-import { GetDocs, GetDocByKey , GetDoc } from '../firestore';
+import { GetDocs, GetDocByKey , GetDoc , DeleteDoc } from '../firestore';
 
 export const getProps = async () => {
     try {
@@ -22,6 +22,15 @@ export const getProp = async (id) => {
     try {
         const doc = await GetDoc(id,'properties');
         return doc
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const deleteProp = async (id) => {
+    try {
+        const { success , message } = await DeleteDoc('properties',id);
+        return {success,message};
     } catch (error) {
         throw error;
     }
