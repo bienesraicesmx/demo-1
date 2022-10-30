@@ -21,7 +21,7 @@
 
 <NavMenu {mobile}>
     <NavItem label="Mis propiedades" href="/own" />
-    <NavItem label="Interacciones" href="/own/interactions" />
+    <!-- <NavItem label="Interacciones" href="/own/interactions" /> -->
     <NavItem label="Publicar" href="/advert/add/thumbnails" />
     <NavItem label="Cuenta" href="/account" />
     <NavItem label="Cerrar sesión" onClick={endSession} />  

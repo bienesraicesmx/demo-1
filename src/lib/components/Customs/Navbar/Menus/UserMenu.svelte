@@ -21,7 +21,7 @@
 </script>
 
 <NavMenu {mobile}>
-    <NavItem label="Interacciones" href="/own/interactions" />
+    <!-- <NavItem label="Interacciones" href="/own/interactions" /> -->
     <NavItem label="Cuenta" href="/account" />
     <NavItem label="Cerrar sesión" onClick={endSession} />  
 </NavMenu>
