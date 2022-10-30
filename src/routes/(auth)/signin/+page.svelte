@@ -71,12 +71,12 @@
         <button class="btn btn-primary mt-3 text-white" disabled={isSubmitting}>Iniciar sesión</button>
         {/if}
         <br>
-        <a href="/auth/password-reset" class="link link-hover link-primary">Olvidé mi contraseña</a>
+        <a href="/pass-recovery" class="link link-hover link-primary">Olvidé mi contraseña</a>
     </form>
     <br>
     <div class="actions text-center">
         <div class="divider"></div>
-        <a href="/auth/signup" class="link link-hover link-primary">Deseo registrarme</a>
+        <a href="/signup" class="link link-hover link-primary">Deseo registrarme</a>
     </div>
 </div>
 
