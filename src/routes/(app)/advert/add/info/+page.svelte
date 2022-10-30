@@ -7,8 +7,6 @@
     export let form;
 
     $: isSubmitting = false;
-
-    $: console.log('Form ',form)
 </script>
 <h2 class="text-primary text-2xl font-bold text-center">
     Completa el siguiente formulario

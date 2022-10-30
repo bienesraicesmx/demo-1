@@ -5,7 +5,6 @@
     export let data;
     export let form;
 
-    $: console.log(data,form)
     const { bio } = data.doc;
     //const { photoURL } = data?.currentUser;
     //$: console.log(photoURL)

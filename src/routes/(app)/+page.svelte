@@ -4,7 +4,6 @@
     export let data;
 
     const { docs } = data;
-    $: console.log(docs)
 </script>
 
 {#if docs.length === 0}
