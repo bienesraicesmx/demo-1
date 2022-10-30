@@ -1,6 +1,6 @@
 <script>
     import { AccountHeader , Bio } from '$lib/components';
-    //import {} from '$lib/firebase/firestore/users';
+    import { auth } from '$lib/store';
 
     export let data;
     export let form;
@@ -25,9 +25,13 @@
         <a href="/pass-recovery" class="link link-hover" >Cambiar</a>
         <div class="divider"></div>
         <!-- Premium -->
+        {#if $auth.premium}
+        <div class="badge badge-primary text-white">Usuario premium</div>
+        {:else}
         <h2 class="text-xl text-primary">Hacer premium</h2>
         <a href="https://telegram.com" target="blank" class="link link-hover" >Ir ahora</a>
         <span class="text-xs text-info">Este enlace te dirigirá a un chat de telegram donde podrás solicitar tu cuenta premium</span>
+        {/if}
     </div>
 </div>
 

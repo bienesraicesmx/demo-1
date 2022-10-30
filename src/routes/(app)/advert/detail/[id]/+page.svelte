@@ -24,14 +24,14 @@
     <div class="upper">
         <div class="image">
             <img class="shadow-xl w-full" src="{imgs[currentImage]}" alt="prop 1 pic">
-            <div class="card shadow-xl w-full p-3 mt-3">
+            <div class="card shadow-xl w-full p-3 mt-3 flex flex-row gap-2">
                 {#each doc?.images as src, i}
                 <img class="active-img w-20" id="{i}" src={src} alt="prop {i + 1} pic" on:click={showImg} on:keydown={showImg} /> 
                 {/each}
             </div>
         </div>
         <div class="hidden md:flex">
-            <MapStatic lat={doc?.center._lat}  lng={doc?.center._long} />
+            <MapStatic lat={doc?.lat}  lng={doc?.lon} />
         </div>
     </div>
     <div class="divider"></div>
