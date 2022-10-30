@@ -36,20 +36,29 @@
     $: if($filters.min || $filters.max) filterRange();
 </script>
 
-{#each filtered as prop}
-    {#if prop?.id}
-    <HomeCard 
-        src={prop.images[0]} 
-        title={prop.title} 
-        description={prop.description}
-        rooms={prop.rooms}
-        baths={prop.baths}
-        price={prop.price}
-        parks={prop.parks}
-        city={prop.city}
-        category={prop.category}
-        operation={prop.operation}
-        id={prop.id}
-    />
-    {/if}
-{/each}
+{#if filtered.length === 0}
+    <div class="content">
+        <h2 class="text-primary text-3xl">Sin resultados</h2>
+        <div class="divider"></div>
+        <span>Al parecer aún no contamos con resultados para tu búsqueda, por favor intenta con otra coincidencia</span>
+    </div>
+{:else}
+    {#each filtered as prop}
+        {#if prop?.id}
+        <HomeCard 
+            src={prop.images[0]} 
+            title={prop.title} 
+            description={prop.description}
+            rooms={prop.rooms}
+            baths={prop.baths}
+            price={prop.price}
+            parks={prop.parks}
+            city={prop.city}
+            category={prop.category}
+            operation={prop.operation}
+            id={prop.id}
+        />
+        {/if}
+    {/each}
+{/if}
+
