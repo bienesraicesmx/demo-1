@@ -10,6 +10,7 @@ export const actions = {
         const formData = await request.formData();
         const title = formData.get('title');
         const city = formData.get('city');
+        const description = formData.get('description');
         const rooms = formData.get('rooms');
         const baths = formData.get('baths');
         const parks = formData.get('parks');
@@ -26,6 +27,6 @@ export const actions = {
         if(!title) return invalid(400,{title,missing:true});
         if(!city && !adv.city) return invalid(400,{city,missing:true});
 
-        return { title,city,rooms,baths,parks,price,category,operation,lat,lon }
+        return { title,city,description,rooms,baths,parks,price,category,operation,lat,lon }
     }
 }

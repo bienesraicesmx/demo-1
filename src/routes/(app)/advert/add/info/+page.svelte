@@ -49,6 +49,9 @@
         </p>
     </FormControl>
     <FormControl>
+        <textarea slot="field" class="textarea textarea-bordered" name="description" placeholder="Descripción "></textarea>
+    </FormControl>
+    <FormControl>
         <Input slot="field" type="number" placeholder="N° de habitaciones" name="rooms" />
     </FormControl>
     <FormControl>

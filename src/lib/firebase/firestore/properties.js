@@ -1,4 +1,17 @@
-import { GetDocs, GetDocByKey , GetDoc , DeleteDoc } from '../firestore';
+import { CreateDoc , GetDocs, GetDocByKey , GetDoc , DeleteDoc } from '../firestore';
+
+
+export const createProp = async (args) => {
+    try {
+        const {success,message} = await CreateDoc(args,'properties');
+        return {
+            success,
+            message
+        }
+    } catch (error) {
+        throw error;
+    }
+}
 
 export const getProps = async () => {
     try {
