@@ -1,6 +1,5 @@
 import { env } from '$env/dynamic/public'
 
-$: console.log(env);
 const cloud_name = env.PUBLIC_CLOUD_NAME;
 const preset = env.PUBLIC_PRESET;
 

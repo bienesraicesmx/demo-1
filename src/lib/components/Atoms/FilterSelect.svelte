@@ -14,11 +14,13 @@
 
 <li class="form-group w-full">
     {#if !value}
-    <label for="" class="text-xs" class:text-primary={!ghost}>{label}</label>
+    <label for="" class="label p-0 pb-1 pt-2 text-primary" class:text-primary={!ghost}>
+        <span class="label-text text-xs text-primary">{label}</span>
+    </label>
     <select
         bind:value
         on:change={onChange} {name}         
-        class="select select-bordered  select-xs w-full max-w-xs"
+        class="select select-bordered select-primary  select-xs w-full max-w-xs"
     >
         <option  disabled selected value="">Seleccione</option>
         {#each options as option}
