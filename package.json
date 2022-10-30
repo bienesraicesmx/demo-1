@@ -23,6 +23,7 @@
     "@beyonk/svelte-mapbox": "^8.1.4",
     "@beyonk/svelte-notifications": "^4.2.0",
     "daisyui": "^2.33.0",
+    "dayjs": "^1.11.6",
     "firebase": "^9.12.1",
     "svelte-file-dropzone": "^1.0.0",
     "svelte-loading-spinners": "^0.3.4",
