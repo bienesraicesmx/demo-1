@@ -12,7 +12,7 @@ export const fetchLocation = async ({lat,lon}) => {
 
 export const fetchCityCoords = async (city) => {
     try {
-        const response = await fetch(`${baseURL}search?format=jsonv2&city=${city}&country=Venezuela}`,
+        const response = await fetch(`${baseURL}search?format=jsonv2&city=${city}&country=Mexico}`,
         {
             method:'POST',
             mode:'cors',
