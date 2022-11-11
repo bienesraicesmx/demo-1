@@ -6,7 +6,7 @@ export const load = async ({params}) => {
     const doc = await getProp(params.id);
     loading.off();
     return {
-        doc
+        doc:{...doc,id:params.id}
     }
     
 }

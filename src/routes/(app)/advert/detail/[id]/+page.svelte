@@ -5,7 +5,7 @@
     export let data;
 
     const { doc } = data;
-
+    $: console.log(doc)
     $: imgs = doc.images; 
     $: currentImage = 0;
 
@@ -52,7 +52,7 @@
     <div class="divider"></div>
     
     {#if $auth.uid !== doc?.createdBy}
-    <MessageBox />
+    <MessageBox advertid={ doc.id } />
     {/if}
 </div>
 

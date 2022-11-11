@@ -3,7 +3,6 @@
     import { auth } from '$lib/store';
 
     export let data;
-    export let form;
 
     const { bio } = data.doc;
     //const { photoURL } = data?.currentUser;

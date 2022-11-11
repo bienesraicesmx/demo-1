@@ -1,8 +1,18 @@
 <script>
-    let message = ''
+    import { Timestamp } from 'firebase/firestore';
+    import { auth } from '$lib/store';
 
+    export let advertid = ''
+    let message = '';
+    
     const handleClick = () => {
-        console.log(message)
+        const user = $auth.uid;
+        const content = message;
+        const date = Timestamp.now();
+        
+        console.log({user,content,date,advertid});
+
+        message = ''
     }
 </script>
 
