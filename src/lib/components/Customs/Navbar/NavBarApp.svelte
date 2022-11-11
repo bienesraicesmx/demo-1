@@ -1,6 +1,7 @@
 <script>
     import { auth } from '$lib/store';
-    import { NavBar , NavMobileSlot , MenuIcon } from '$lib/components';
+    import { NavBar , NavMobileSlot , MenuIcon , BellRingIcon } from '$lib/components';
+    import { getMessages } from '$lib/firebase/firestore/messages';
     import { NavBarBrand , UserMenu , SellerMenu , NavDefault } from './Menus';
 
     export let navbar;
@@ -10,6 +11,8 @@
         seller:SellerMenu,
         user:UserMenu
     }
+
+
 </script>
 
 {#if visible}
@@ -20,6 +23,11 @@
             <svelte:component this={Bars[$auth.profile]} mobile={true} />
         </NavMobileSlot>
         <NavBarBrand  slot="brand"/>
+        <!-- <p slot="center">
+            <span class="text-sm">
+                <BellRingIcon size={26}/>
+            </span>
+        </p>         -->
         <div slot="end">
             <div class="hidden lg:flex">
                 <svelte:component this={Bars[$auth.profile]} mobile={false} />

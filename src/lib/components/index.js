@@ -40,6 +40,9 @@ export {default as CarIcon} from './icons/CarIcon.svelte';
 export {default as BathIcon} from './icons/BathIcon.svelte';
 export {default as RoomIcon} from './icons/RoomIcon.svelte';
 export {default as CloseIcon} from './icons/CloseIcon.svelte';
+export {default as BellRingIcon} from './icons/BellRing.svelte'
+
+
 
 export {default as NavBarApp} from './Customs/Navbar/NavBarApp.svelte';
 export {default as HomeCard} from './Customs/Cards/HomeCard.svelte';

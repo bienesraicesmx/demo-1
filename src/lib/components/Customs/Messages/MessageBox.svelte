@@ -13,7 +13,7 @@
         const user = await getUser($auth.uid);
         const content = message;
         const date = Timestamp.now();
-        await createMessage({user,content,date,advertid,readed:false});
+        await createMessage({user,content,date,advertid,readed:false,answered:false,reply:null});
         message = '';
         loading = false;
     }
