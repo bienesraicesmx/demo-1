@@ -1,14 +1,22 @@
 <script>
     import { MapStatic , MessageBox } from '$lib/components';
+    import { getMessageAdvert } from '$lib/firebase/firestore/messages';
     import { auth } from '$lib/store';
-    
+    import { sinceDate } from '$lib/tools/dates';
     export let data;
 
     const { doc } = data;
-    $: console.log(doc)
     $: imgs = doc.images; 
     $: currentImage = 0;
+    $: messages = null;
+    
+    const fetchMessages = async () => {
+        messages = await getMessageAdvert(doc.id);
+        messages
+        .map(msg => msg.date = sinceDate(msg.date.toDate()));
+    }
 
+    fetchMessages()
     const showImg = (e) => {
         currentImage = e.target.id;
     }
@@ -51,8 +59,43 @@
     </div>
     <div class="divider"></div>
     
-    {#if $auth.uid !== doc?.createdBy}
-    <MessageBox advertid={ doc.id } />
+    {#if !$auth.uid}
+        <p class="text-2xl text-primary">Inicia sesión para contactar al vendedor</p>
+    {:else if $auth.uid !== doc?.createdBy}
+        <MessageBox advertid={ doc.id } />
+        <div class="divider"></div>
+    {/if}
+    {#if messages?.length}
+        <div class="mt-6">
+            <h3 class="text-2xl text-primary">Mensajes</h3>
+            <br>
+            {#each messages as message}
+            {#if message.user.avatar}
+                <div class="avatar">
+                    <div class="w-8 rounded">
+                        <img src="{message.user.avatar}" alt="Tailwind-CSS-Avatar-component" />
+                    </div>
+                </div>
+                {:else}
+                <div class="mb-3">
+                    <div class="avatar placeholder">
+                        <div class="bg-neutral-focus text-neutral-content rounded-full w-8">
+                            <span class="text-xs">{message.user.username.split('')[0]}</span>
+                        </div>
+                    </div>
+                    <span class="text-primary">{message.user.username}</span>
+                </div>
+            {/if}
+            
+            <p>{message.content}</p>
+            <span class="text-xs text-primary">{message.date}</span>
+            {#if $auth.uid === doc.createdBy}
+            <div class="flex justify-end">
+                <a href={null} class="link link-hover link-primary text-xs ">Responder</a>
+            </div>
+            {/if}
+            {/each}
+        </div>
     {/if}
 </div>
 

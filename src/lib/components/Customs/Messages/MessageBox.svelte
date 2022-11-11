@@ -1,18 +1,21 @@
 <script>
     import { Timestamp } from 'firebase/firestore';
+    import { createMessage } from '$lib/firebase/firestore/messages';
+    import { getUser } from '$lib/firebase/firestore/users';
     import { auth } from '$lib/store';
 
     export let advertid = ''
     let message = '';
-    
-    const handleClick = () => {
-        const user = $auth.uid;
+    $: loading = false;
+
+    const handleClick = async () => {
+        loading = true;
+        const user = await getUser($auth.uid);
         const content = message;
         const date = Timestamp.now();
-        
-        console.log({user,content,date,advertid});
-
-        message = ''
+        await createMessage({user,content,date,advertid,readed:false});
+        message = '';
+        loading = false;
     }
 </script>
 
@@ -26,4 +29,4 @@
     placeholder="Escriba aquí su mensaje..."
 ></textarea>
 <br>
-<button on:click={handleClick} class="btn btn-primary btn-sm text-white mt-2">Enviar</button>
+<button on:click={handleClick} class="btn btn-primary btn-sm text-white mt-2" disabled={loading}>Enviar</button>
