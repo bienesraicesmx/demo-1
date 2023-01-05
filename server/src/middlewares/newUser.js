@@ -36,15 +36,15 @@ const middlewares = {
     },
 
     ValidUser : async function (req, res, next) {
-		const validUser = await User.findOne({"email":req.query.email})
+		const validUser = await User.findOne({"email":req.body.email})
 		if(validUser){
 			return res.status(400).json({ 
 			    "errors": [
 			        {
-			            "value": req.query.email,
+			            "value": req.body.email,
 			            "msg": "The value already exists",
 			            "param": "email",
-			            "location": "query"
+			            "location": "body"
 			        }
 			    ] 
 			});
@@ -52,15 +52,15 @@ const middlewares = {
 		next()
     },    
     ValidId : async function (req, res, next) {
-		const validIdUser = await User.findOne({"_id":req.query.id})
+		const validIdUser = await User.findOne({"_id":req.body.id})
 		if(!validIdUser){
 			return res.status(400).json({ 
 			    "errors": [
 			        {
-			            "value": req.query.email,
+			            "value": req.body.email,
 			            "msg": "User does not exist",
 			            "param": "email",
-			            "location": "query"
+			            "location": "body"
 			        }
 			    ] 
 			});

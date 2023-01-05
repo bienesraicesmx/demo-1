@@ -10,7 +10,7 @@ const Categoria = () => {
                 </span>
 
                 <select
-                    className="w-full p-2.5 text-gray-500 bg-white border rounded-md py-1 shadow-sm outline-none appearance-none focus:border-indigo-600"
+                    className="w-full p-2.5 text-sm text-gray-500 bg-white border rounded-md py-1 shadow-sm outline-none appearance-none focus:border-indigo-600"
                 >
                     <option defaultValue>Categorías</option>
                     <option>Casa</option>

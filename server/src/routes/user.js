@@ -20,9 +20,9 @@ router.get('/', async (req, resp) => {
 router.get('/:id', async (req, resp) => {
 	const fieldUser = await User.findById(req.params.id)
 	if(fieldUser){
-		resp.json(fieldUser)
+		return resp.json(fieldUser)
 	}
-	resp.json({
+	return resp.json({
 	"errors": [
 			{
 			    "value": req.params.id,
@@ -39,11 +39,12 @@ router.get('/:id', async (req, resp) => {
 router.post('/',ValidUser)
 router.post('/', 
 	[
-		check('email').isEmail().normalizeEmail(), 
-		check('password').isLength({ min: 6 }),
+		body('email').isEmail().normalizeEmail(), 
+		body('password').isLength({ min: 6 }),
 		sanitizeQuery('notifyOnReply').toBoolean()
 	],
 	async (req, resp) => {
+	
 	//resp.set('Access-Control-Allow-Origin', '*')
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -55,7 +56,8 @@ router.post('/',
 	let date = new Date()
 	const fecha = moment(date).format('L')
 	const hora = moment(date).format('LT')
-	const {email, password} = req.query
+	
+	const {email, password} = req.body
 	const newUser = new User({email, password, fecha, hora})
 	const request = await newUser.save()
 	if(request){
@@ -100,7 +102,7 @@ router.put('/:id',
 	const updateUser = {email, password, fecha, hora}
 	const request = await User.findByIdAndUpdate(req.params.id, updateUser)
 	if(request){
-		resp.json({
+		return resp.json({
 			status: '200',
 			message: 'User Updated'
 		})
@@ -109,28 +111,6 @@ router.put('/:id',
 		"errors": [
 			{
 			    "msg": "Error en DB",
-			    "param": "id",
-			    "location": "body"
-			}
-		]
-	})
-
-})
-
-// Delete
-router.delete('/:id', async (req, resp) => {
-	const delUser = await User.findByIdAndRemove(req.params.id)
-	if(delUser){
-		resp.json({
-			status: '201',
-			message: 'User Deleted'
-		})
-	}
-	return resp.status(400).json({
-		"errors": [
-			{
-			    "value": req.params.id,
-			    "msg": "User does not exist",
 			    "param": "id",
 			    "location": "body"
 			}

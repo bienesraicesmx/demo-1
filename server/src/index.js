@@ -7,6 +7,7 @@ const path = require('path')
 const colors = require('colors')
 const cors = require('cors')
 const isLoggedIn = require('./middlewares/newUser').isLoggedIn
+require('dotenv').config()
 
 //DB
 const { mongoose } = require('./db')
@@ -21,13 +22,13 @@ app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
 app.use(session({
-    secret: 'emailprueba',
+    secret: process.env.sessionKey,
     resave: false,
     saveUninitialized: true
 }))
 
 //Routes
-//app.use('/api/v1/properties', require('./routes/property'))
+app.use('/api/v1/properties', require('./routes/property'))
 app.use('/api/v1/users', require('./routes/user'))
 app.use('/api/v1/', require('./routes/index'))
 

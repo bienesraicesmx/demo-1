@@ -2,17 +2,15 @@ const express = require('express')
 const { body, check, sanitizeBody, sanitizeQuery, validationResult } = require('express-validator');
 const veryFyToken = require('../middlewares/newUser').veryFyToken
 const jwt = require('jsonwebtoken')
-const config = require('../configs/config')
 const router = express.Router()
-
 const User = require('../models/users')
 
 // Login
 
 router.post('/login', 
 	[
-		check('email').isEmail().normalizeEmail(), 
-		sanitizeQuery('notifyOnReply').toBoolean()
+		body('email').isEmail().normalizeEmail(), 
+		sanitizeBody('notifyOnReply').toBoolean()
 	],
 	async (req, resp) => {
 	//resp.set('Access-Control-Allow-Origin', '*')
@@ -23,20 +21,23 @@ router.post('/login',
 		});
 	}
 
-	const validUser = await User.findOne({"email":req.query.email})
+	const validUser = await User.findOne({"email":req.body.email})
 	if(validUser){
-		if(req.query.password === validUser.password){
-			req.session.email = req.query.email
-			req.session.admin = true;
+		if(req.body.password === validUser.password){
+			//req.session.email = req.body.email
+			//req.session.admin = true;
+			req.session.userID = validUser._id.toString();
 			const payload = {
-				check:  true
+				check:  true,
+				userID: validUser._id.toString()
 			};
-			const token = jwt.sign(payload, config.llave, {
-			expiresIn: 180
-			// 	//expiresIn: 1440
+			const token = jwt.sign(payload, process.env.JWTKey, {
+			
+				expiresIn: process.env.JWTKeyExpire
+			
 			});
 			resp.json({
-				mensaje: 'Autenticación correcta',
+				message: 'Autenticación correcta',
 				data: req.session,
 				jwt: token
 			});

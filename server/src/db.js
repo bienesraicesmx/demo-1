@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-const URI = 'mongodb+srv://casinodb:ltkGos5ftdeBPAAL@cluster0.izujtoi.mongodb.net/?retryWrites=true&w=majority'
-
+const URI = process.env.mongoDBuri
 
 mongoose.connect(URI, {
 	useUnifiedTopology: true,
