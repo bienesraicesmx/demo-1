@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({setCookie}) => {
+
+    let history = useHistory();
 
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -16,13 +18,30 @@ const Login = () => {
                     }
                 })
             .then(function (response) {
-                console.log(response)
+                setCookie("jwt", response.data.jwt, 1);
+                console.log(response);
+                history.push('/publicaciones');
+                // redirección a página principal
+                // tomar jwt para insertarlo en cookie (duración 24 horas)
             })
             .catch(function (error) {
                 console.log(error);
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }
+
+    // function GetURLParameter(sParam){
+    //     var sPageURL = window.location.search.substring(1);
+    //     var sURLVariables = sPageURL.split('&');
+    //     for (var i = 0; i < sURLVariables.length; i++) 
+    //     {
+    //         var sParameterName = sURLVariables[i].split('=');
+    //         if (sParameterName[0] === sParam) 
+    //         {
+    //             return sParameterName[1];
+    //         }
+    //     }
+    // }
 
     return (
 

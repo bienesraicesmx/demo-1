@@ -66,8 +66,6 @@ router.post('/',
 
 	const password = await encryptPassword(req.body.password)
 
-	console.log(password)
-
 	let date = new Date()
 	const fecha = moment(date).format('L')
 	const hora = moment(date).format('LT')

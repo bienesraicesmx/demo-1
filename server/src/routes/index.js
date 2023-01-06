@@ -18,7 +18,8 @@ router.post('/login',
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return resp.status(406).json({ 
-			errors: errors.array() 
+			response: "",
+			error: "Parametro email invalido"
 		});
 	}
 
@@ -43,18 +44,58 @@ router.post('/login',
 				error: false,
 				jwt: token
 			});
+
 		}else{
+
 			return resp.status(401).json({
 				response: '',
 				error: 'Password Invalido!'
-			})			
+			})	
+
 		}
 	}else{
+
 		return resp.status(401).json({
 			response: '',
 			error: 'Email Invalido!'
 		})
+
 	}
+
+})
+
+//check JWT
+
+router.post('/checkjwt', 
+	[
+		body('jwt').isLength({ min: 6 }),
+		sanitizeBody('notifyOnReply').toBoolean()
+	],
+	async (req, resp) => {
+	//resp.set('Access-Control-Allow-Origin', '*')
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return resp.status(406).json({ 
+			response: "",
+			error: "Parametro jwt Invalido"
+		});
+	}
+
+	jwt.verify(req.body.jwt, process.env.JWTKey, (err, decoded) => { 
+
+		if (err) {
+			return resp.json({ 
+				"error": "Invalid Session",
+				"response": ""
+			}); 
+		} 
+
+		return resp.json({ 
+			"error": false,
+			"response": "Valid Session"
+		}); 
+
+	});
 
 })
 

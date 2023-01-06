@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Registro = () => {
 
+    let history = useHistory();
+
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [userRPassword, setUserRPassword] = useState('');
 
     const registerSesion = async (params) => {
         await axios
@@ -16,6 +20,8 @@ const Registro = () => {
                 })
             .then(function (response) {
                 console.log(response)
+                history.push('/publicaciones');
+                // redirección a página principal y login directo
             })
             .catch(function (error) {
                 console.log(error);
@@ -44,20 +50,22 @@ const Registro = () => {
                         </div>
                         <div className="mt-4">
                             <label className="block">Password</label>
-                            <input type="password" placeholder="Password"
+                            <input
+                                onChange={e => setUserPassword(e.target.value)} 
+                                type="password" placeholder="Password"
                                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                         </div>
                         <div className="mt-4">
                             <label className="block">Confirm</label>
                             <input
-                                onChange={e => setUserPassword(e.target.value)}
+                                onChange={e => setUserRPassword(e.target.value)}
                                 type="password" placeholder="Password"
                                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                         </div>
 
                         <button
                             onClick={() => {
-                                registerSesion({ email: userEmail, password: userPassword })
+                                registerSesion({ email: userEmail, password: userPassword, r_password: userRPassword })
                             }}
                             className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
                             Register
