@@ -9,6 +9,11 @@ const PropertiesSchema = new Schema({
         ref: 'Category',
         required: true
     },
+    gallery: {
+        type: Schema.Types.Mixed,
+        ref: 'Gallery',
+        required: true
+    },
     price : {
         type: Number,
         default:0

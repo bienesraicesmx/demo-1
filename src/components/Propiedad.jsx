@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Propiedad = ({ item }) => {
-    
 
     return (
         <>
@@ -36,7 +35,7 @@ const Propiedad = ({ item }) => {
                     </div>
 
                     <div className="mx-auto flex items-center mt-2">
-                        <Link to={`/propiedad/${item.id}`}>
+                        <Link to={`/propiedad/${item._id}`}>
                             <button className="mx-auto w-72 flex px-2 py-1 bg-green-400 rounded-full">
                                 <p className="mx-auto font-medium text-gray-100 text-sm font-bold px-2">Ver Propiedad</p>
                             </button>

@@ -1,33 +1,61 @@
 const User = require('../models/users')
-const config = require('../configs/config')
 const jwt = require('jsonwebtoken')
 const middlewares = {
 
     isLoggedIn : function (req, res, next) {
-		if (req.session && req.session.email && req.session.admin){
-			return next();
-		}else{
-			return res.sendStatus(401);
+
+		const token = req.headers['bearer'];
+
+		if (!token) {
+
+			return res.json({ 
+			    "error": "Invalid Session",
+				"response": ""
+			});
+
 		}
+
+		jwt.verify(token, process.env.JWTKey, (err, decoded) => {      
+			if (err) {
+				return res.json({ 
+					"error": "Invalid Session",
+					"response": ""
+				}); 
+			} else {
+				return next();   
+			}
+		});
+
     },
 
-    veryFyToken : function (req, res, next){
-	    const token = req.headers['access-token'];
+	getUserID : async function (token) {
+
+		let userID = ""
+
+		await jwt.verify(token, process.env.JWTKey, (err, decoded) => {      
+			userID = decoded.userID
+		});
+
+		return userID
+
+    },
+
+    veryFyToken : function (req, res){
+
+	    const token = req.headers['bearer'];
 	 
 	    if (token) {
-	      jwt.verify(token, config.llave, (err, decoded) => {      
+	      jwt.verify(token, process.env.JWTKey, (err, decoded) => {      
 	        if (err) {
-	          return res.json({ mensaje: 'Token inválida' });    
+	          return { isOK: false };    
 	        } else {
-	          req.decoded = decoded;    
-	          next();
+				return { isOK: false, info: decoded};    
 	        }
 	      });
 	    } else {
-	      res.send({ 
-	          mensaje: 'Token no proveída.' 
-	      });
+			return { isOK: false }; 
 	    }
+
     },
 
     isSuperUser : function (req, res, next) {

@@ -1,28 +1,16 @@
 import {useState, useEffect} from 'react';
 import axios from "axios";
 
-const useData = () => {
+const useFetchData = () => {
 
-    const [propiedades2, setPropiedades2] = useState({});
-
-    useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/v1/properties/')
-            .then((response) => {
-                setPropiedades2(response.data.response)
-                // console.log(propiedades)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    const [propiedades, setPropiedades] = useState({});
 
     return ( 
-        propiedades2
+        propiedades
      );
 }
  
-export default useData;
+export default useFetchData;
 
 // const propiedades = [
 //     {

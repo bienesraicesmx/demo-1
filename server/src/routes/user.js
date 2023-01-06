@@ -3,6 +3,7 @@ const moment = require('moment')
 const { body, check, sanitizeBody, sanitizeQuery, validationResult } = require('express-validator');
 const ValidUser = require('../middlewares/newUser').ValidUser
 const ValidId = require('../middlewares/newUser').ValidId
+const {encryptPassword} = require('../middlewares/password_hashing')
 const router = express.Router()
 
 const User = require('../models/users')
@@ -41,6 +42,7 @@ router.post('/',
 	[
 		body('email').isEmail().normalizeEmail(), 
 		body('password').isLength({ min: 6 }),
+		body('r_password').isLength({ min: 6 }),
 		sanitizeQuery('notifyOnReply').toBoolean()
 	],
 	async (req, resp) => {
@@ -49,30 +51,39 @@ router.post('/',
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return resp.status(406).json({ 
-			errors: errors.array() 
+			error: errors.array() 
 		});
 	}
+
+	if(req.body.password !== req.body.r_password){
+
+		return resp.status(406).json({
+			response: '',
+			error: "Passwords don't Match"
+		})
+
+	}
+
+	const password = await encryptPassword(req.body.password)
+
+	console.log(password)
 
 	let date = new Date()
 	const fecha = moment(date).format('L')
 	const hora = moment(date).format('LT')
 	
-	const {email, password} = req.body
+	const {email} = req.body
 	const newUser = new User({email, password, fecha, hora})
 	const request = await newUser.save()
 	if(request){
 		return resp.status(200).json({
-			message: 'User Created'
+			response: 'Usuario Creado',
+			error:false
 		})
 	}
 	return resp.status(400).json({
-		"errors": [
-			{
-			    "msg": "Error en DB",
-			    "param": "id",
-			    "location": "body"
-			}
-		]
+		"error":"Intente de nuevo",
+		"response":""
 	})
 })
 

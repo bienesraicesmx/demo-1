@@ -1,48 +1,32 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Categoria from "../components/Categoria";
 import Propiedad from "../components/Propiedad";
 
-import useData from '../hooks/useData.js'
+import axios from "axios";
+
+// import useData from '../hooks/useFetchData.js'
 
 const Publicaciones = () => {
 
-    const {propiedades2} = useData();
+    const [propiedades, setPropiedades] = useState({})
 
-    const propiedades = [
-    {
-        id: 1,
-        img: "https://fc-abogados.com/es/wp-content/uploads/2015/11/Imagen-para-post-2020-10-29T150842.451.jpg",
-        title: "house 1",
-        categorie: "casa",
-        description: "this is a house",
-        rooms: 2,
-        baño: 1,
-        estacionamiento: 1,
-        price: 20000
-    },
-    {
-        id: 2,
-        img: "https://fc-abogados.com/es/wp-content/uploads/2015/11/Imagen-para-post-2020-10-29T150842.451.jpg",
-        title: "house 2",
-        categorie: "apartamento",
-        description: "this is a house",
-        rooms: 2,
-        baño: 1,
-        estacionamiento: 1,
-        price: 30000
-    },
-    {
-        id: 3,
-        img: "https://fc-abogados.com/es/wp-content/uploads/2015/11/Imagen-para-post-2020-10-29T150842.451.jpg",
-        title: "house 3",
-        categorie: "Renta",
-        description: "this is a house",
-        rooms: 1,
-        baño: 5,
-        estacionamiento: 3,
-        price: 40000
+    const getPropertys = async () => {
+        axios.get('http://127.0.0.1:5000/api/v1/properties/')
+            .then((response) => {
+                // console.log(response.data);
+                setPropiedades(response.data.response);
+                console.log(propiedades);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }
-];
+
+    useEffect(() => {
+        getPropertys();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
     return (
         <>

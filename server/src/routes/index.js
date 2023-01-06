@@ -4,6 +4,7 @@ const veryFyToken = require('../middlewares/newUser').veryFyToken
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 const User = require('../models/users')
+const {comparePassword} = require('../middlewares/password_hashing')
 
 // Login
 
@@ -23,7 +24,8 @@ router.post('/login',
 
 	const validUser = await User.findOne({"email":req.body.email})
 	if(validUser){
-		if(req.body.password === validUser.password){
+		
+		if(await comparePassword(req.body.password, validUser.password)){
 			//req.session.email = req.body.email
 			//req.session.admin = true;
 			req.session.userID = validUser._id.toString();
@@ -37,20 +39,20 @@ router.post('/login',
 			
 			});
 			resp.json({
-				message: 'Autenticación correcta',
-				data: req.session,
+				response: 'Autenticación correcta',
+				error: false,
 				jwt: token
 			});
 		}else{
 			return resp.status(401).json({
-				status: '401',
-				message: 'Password Invalido!'
+				response: '',
+				error: 'Password Invalido!'
 			})			
 		}
 	}else{
 		return resp.status(401).json({
-			status: '401',
-			message: 'Email Invalido!'
+			response: '',
+			error: 'Email Invalido!'
 		})
 	}
 
